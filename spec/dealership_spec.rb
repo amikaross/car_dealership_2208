@@ -18,15 +18,6 @@ RSpec.describe Dealership do
     it 'has an empty inventory by default' do 
       expect(@dealership.inventory).to eq []
     end
-
-    it 'has a readable "details" attribute' do 
-      @dealership.add_car(@car_1)
-      @dealership.add_car(@car_2)
-      @dealership.add_car(@car_3)
-      @dealership.add_car(@car_4)
-
-      expect(@dealership.details).to eq({"total_value"=>156000, "address"=>"123 Main Street"})
-    end
   end
 
   describe '#inventory_count' do 
@@ -80,6 +71,17 @@ RSpec.describe Dealership do
       @dealership.add_car(@car_4)
 
       expect(@dealership.total_value).to eq 156000
+    end
+  end
+
+  describe "#details" do 
+    it "returns a hash that includes the dealership's total value and address" do 
+      @dealership.add_car(@car_1)
+      @dealership.add_car(@car_2)
+      @dealership.add_car(@car_3)
+      @dealership.add_car(@car_4)
+
+      expect(@dealership.details).to eq({"total_value"=>156000, "address"=>"123 Main Street"})
     end
   end
 end

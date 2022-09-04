@@ -1,13 +1,14 @@
 require './lib/car'
 
 class Dealership
-  attr_reader :inventory
+  attr_reader :inventory,
+              :details
 
   def initialize(name, address)
     @name = name 
-    @address = address 
+    @address = address
     @inventory = []
-  end
+  end 
 
   def inventory_count 
     @inventory.count
@@ -31,5 +32,12 @@ class Dealership
       total_value += car.total_cost
     end
     total_value
+  end
+
+  def details 
+    {
+      "total_value" => total_value,
+      "address" => @address
+    }
   end
 end
