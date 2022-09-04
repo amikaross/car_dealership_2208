@@ -3,23 +3,23 @@ require './lib/dealership'
 
 RSpec.describe Dealership do
   before(:each) do 
-    @dealership = Dealership.new("Acme Auto", "123 Main Street")
-    @car_1 = Car.new("Ford Mustange", 1500, 36)
-    @car_2 = Car.new("Toyota Prius", 1000, 48)
+    @dealership = Dealership.new('Acme Auto', '123 Main Street')
+    @car_1 = Car.new('Ford Mustange', 1500, 36)
+    @car_2 = Car.new('Toyota Prius', 1000, 48)
   end
 
-  describe "#initialize" do 
-    it "exists" do 
+  describe '#initialize' do 
+    it 'exists' do 
       expect(@dealership).to be_a Dealership 
     end
 
-    it "has an empty inventory by default" do 
+    it 'has an empty inventory by default' do 
       expect(@dealership.inventory).to eq []
     end
   end
 
-  describe "#inventory_count" do 
-    it "counts the number of cars in the inventory" do 
+  describe '#inventory_count' do 
+    it 'counts the number of cars in the inventory' do 
       expect(@dealership.inventory_count).to eq 0
       @dealership.add_car(@car_1)
       @dealership.add_car(@car_2)
@@ -28,8 +28,8 @@ RSpec.describe Dealership do
     end
   end
 
-  describe "#add_car" do 
-    it "adds car objects to the inventory"
+  describe '#add_car' do 
+    it 'adds car objects to the inventory'
       @dealership.add_car(@car_1)
       @dealership.add_car(@car_2)
 
