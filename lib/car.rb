@@ -14,4 +14,8 @@ class Car
     @total_cost = monthly_payment * loan_length
     @color = nil 
   end
+
+  def paint!(color)
+    @color = color
+  end
 end
