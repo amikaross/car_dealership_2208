@@ -16,4 +16,12 @@ class Dealership
   def add_car(car)
     @inventory.push(car) 
   end
+
+  def has_inventory?
+    @inventory != []
+  end
+
+  def cars_by_make(make)
+    @inventory.select { |car| car.make == make }
+  end
 end
