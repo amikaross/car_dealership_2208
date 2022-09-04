@@ -84,4 +84,70 @@ RSpec.describe Dealership do
       expect(@dealership.details).to eq({"total_value"=>156000, "address"=>"123 Main Street"})
     end
   end
+
+  describe "#average_price_of_car" do 
+    it "returns a string of the average price of the cars in the inventory" do 
+      @dealership.add_car(@car_1)
+      @dealership.add_car(@car_2)
+      @dealership.add_car(@car_3)
+      @dealership.add_car(@car_4)
+
+      expect(@dealership.average_price_of_car).to eq "39,000"
+    end
+  end
+
+  describe "#cars_sorted_by_price" do 
+    it "returns an array of cars sorted by price (low to high)" do 
+      @dealership.add_car(@car_1)
+      @dealership.add_car(@car_2)
+      @dealership.add_car(@car_3)
+      @dealership.add_car(@car_4)
+
+      expect(@dealership.cars_sorted_by_price).to eq [@car_3, @car_4, @car_2, @car_1]
+    end
+  end
+
+  describe "#inventory_hash" do 
+    it "returns a hash" do 
+      @dealership.add_car(@car_1)
+      @dealership.add_car(@car_2)
+      @dealership.add_car(@car_3)
+      @dealership.add_car(@car_4)
+      
+      expect(@dealership.inventory_hash).to be_a Hash
+    end
+
+    it "has keys corresponding to car makes" do 
+      @dealership.add_car(@car_1)
+      @dealership.add_car(@car_2)
+      @dealership.add_car(@car_3)
+      @dealership.add_car(@car_4)
+
+      expect(@dealership.inventory_hash.keys.include?("Ford")).to eq true
+      expect(@dealership.inventory_hash.keys.include?("Toyota")).to eq true
+      expect(@dealership.inventory_hash.keys.include?("Chevrolet")).to eq true
+      expect(@dealership.inventory_hash.keys.length).to eq 3
+    end
+
+    it "has car objects for values" do 
+      @dealership.add_car(@car_1)
+      @dealership.add_car(@car_2)
+      @dealership.add_car(@car_3)
+      @dealership.add_car(@car_4)
+      values = @dealership.inventory_hash.values
+      values.each do |value|
+        expect(value).to be_a Car
+      end
+    end
+
+    it "corresponds the correct cars with their makes" do 
+      @dealership.add_car(@car_1)
+      @dealership.add_car(@car_2)
+      @dealership.add_car(@car_3)
+      @dealership.add_car(@car_4)
+      inventory_hash = @dealership.inventory_hash
+      expect(inventory_hash["Ford"]).to eq @car_1
+      expect(inventory_hash["Chevrolet"]).to eq @car_4
+    end
+  end
 end

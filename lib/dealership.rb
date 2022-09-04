@@ -40,4 +40,25 @@ class Dealership
       "address" => @address
     }
   end
+
+  def average_price_of_car 
+    number_format(total_value / inventory_count)
+  end
+
+  def number_format(number)
+    groups_of_three = number.to_s.chars.reverse.each_slice(3)
+    groups_of_three.map {|group| group.join}.join(',').reverse
+  end
+
+  def cars_sorted_by_price 
+    inventory.sort_by { |car| car.total_cost }
+  end
+
+  def inventory_hash 
+    inventory_hash = Hash.new
+    @inventory.each do |car|
+      inventory_hash[car.make] = car
+    end 
+  inventory_hash
+  end
 end
