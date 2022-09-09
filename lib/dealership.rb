@@ -55,10 +55,8 @@ class Dealership
   end
 
   def inventory_hash 
-    inventory_hash = Hash.new
-    @inventory.each do |car|
-      inventory_hash[car.make] = car
+    @inventory.each_with_object(Hash.new) do |car, hash|
+      hash.keys.include?(hash[car.make]) ? next : hash[car.make] = cars_by_make(car.make)
     end 
-  inventory_hash
   end
 end

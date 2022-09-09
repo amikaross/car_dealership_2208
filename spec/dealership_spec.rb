@@ -129,14 +129,17 @@ RSpec.describe Dealership do
       expect(@dealership.inventory_hash.keys.length).to eq 3
     end
 
-    it "has car objects for values" do 
+    it "has an array of car objects for values" do 
       @dealership.add_car(@car_1)
       @dealership.add_car(@car_2)
       @dealership.add_car(@car_3)
       @dealership.add_car(@car_4)
       values = @dealership.inventory_hash.values
       values.each do |value|
-        expect(value).to be_a Car
+        expect(value).to be_an Array
+        value.each do |car|
+          expect(car).to be_a Car
+        end
       end
     end
 
@@ -146,8 +149,9 @@ RSpec.describe Dealership do
       @dealership.add_car(@car_3)
       @dealership.add_car(@car_4)
       inventory_hash = @dealership.inventory_hash
-      expect(inventory_hash["Ford"]).to eq @car_1
-      expect(inventory_hash["Chevrolet"]).to eq @car_4
+      expect(inventory_hash["Ford"]).to eq [@car_1]
+      expect(inventory_hash["Toyota"]).to eq [@car_2, @car_3]
+      expect(inventory_hash["Chevrolet"]).to eq [@car_4]
     end
   end
 end
